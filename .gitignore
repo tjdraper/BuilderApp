@@ -1,0 +1,18 @@
+# Project Specific
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Tools
+.jshintrc
+mixture.json
+prepros.json
+node_modules/
+bower_components/
+
+# htaccess
+.htaccess
+
+# This must remain at the end of the ignore file
+!.gitkeep
