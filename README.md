@@ -4,7 +4,7 @@
 
 ## About
 
-If you have occasion to build simple static HTML sites that just don't warrant the use of a full blow CMS — or are building portable, distributable pages for something like documentation where it must be static HTML files, but want to remain [DRY] and keep common parts of the site in template/include files, this may be for you.
+If you have occasion to build simple static HTML sites that just don't warrant the use of a full blown CMS — or are building portable, distributable pages for something like documentation where it must be static HTML files, but want to remain [DRY] and keep common parts of the site in template/include files, this may be for you.
 
 It’s a simple, bare-bones sort of thing, but it get’s the job done.
 

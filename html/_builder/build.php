@@ -53,7 +53,7 @@ function scanpages($pattern, $final_includes_before, $final_includes_after, $min
 			$content .= $final_includes_after;
 
 			// PARSE ROOT PATH VARIABLE
-			// Figure out what leve we are at
+			// Figure out what level we are at
 			$level = substr_count($filename, '/');
 			// Set the root path based on the level
 			$root_path = str_repeat('../', ($level - 1));
