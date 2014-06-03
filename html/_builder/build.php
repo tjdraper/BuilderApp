@@ -1,22 +1,6 @@
 <?php
 
-// SETTINGS
-
-$minify = true;
-
-// Includes Before
-$includes_before = array(
-	'header'
-);
-
-// Includes After
-$includes_after = array(
-	'footer'
-);
-
-// END SETTINGS
-
-////////////////////////////////////////////
+include 'settings.php';
 
 // Set the includes for including before
 foreach ($includes_before as $include_before) {
@@ -44,7 +28,7 @@ function scanpages($pattern, $final_includes_before, $final_includes_after, $min
 			$file = fopen('../' . $dir,'w');
 
 			// Set the before includes
-			$content .= $final_includes_before;
+			$content = $final_includes_before;
 
 			// Get our page contents
 			$content .= file_get_contents($filename);
