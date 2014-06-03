@@ -44,6 +44,12 @@ function scanpages($pattern, $final_includes_before, $final_includes_after, $min
 			// Then do the replacement
 			$content =  preg_replace('{{{root_path}}}', $root_path, $content);
 
+			// PARSE PAGE TITLE
+			// Yeah, I’m sure there's a more effecient way of doing this, and someday I'll figure it out.
+			preg_match('^{{meta_title}}(.*){{/meta_title}}^', $content, $page_title);
+			$content =  preg_replace('^{{meta_title}}(.*){{/meta_title}}^', '', $content);
+			$content = preg_replace('{{{meta_title}}}', $page_title[1], $content);
+
 			// Check if minify is set to true
 			if ($minify == true) {
 				require_once('_libraries/Minify/HTML.php');

@@ -42,6 +42,20 @@ So for instance, in the header include, you could link to the stylesheet like so
 
 	<link rel="stylesheet" href="{{root_path}}css/style.css">
 
+## Variable Set
+
+At this time there is one hard-coded variable set. And that is:
+
+### {{meta_title}}
+
+In your page template, set your meta title like this:
+
+	{{meta_title}}My Page Title{{/meta_title}}
+
+And then make sure in your header include that you set the variable {{meta_title}}.
+
+The {{meta_title}} set will be removed from your final output.
+
 ## Settings
 
 There are just a couple of settings available at the top of the build.php file and they are as follows.

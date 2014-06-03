@@ -1,3 +1,7 @@
+# 0.2.0
+
+- Add parsing of {{meta_title}} variable.
+
 # 0.1.1
 
 - Fix a nasty bug where each subsequent page to be written would contain all the contents of the previous page.
