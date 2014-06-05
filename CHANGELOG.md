@@ -1,3 +1,7 @@
+# 0.2.1
+
+- Output path on success/fail message now reflects from root instead of including "/pages/"
+
 # 0.2.0
 
 - Add parsing of {{meta_title}} variable.

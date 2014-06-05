@@ -64,9 +64,9 @@ function scanpages($pattern, $final_includes_before, $final_includes_after, $min
 
 			// Determine if writing the file succeeded or failed and print out the appropritate status
 			if ($write != '') {
-				echo 'success - /' . $filename . '<br>';
+				echo 'success - ' . preg_replace('/pages/', '', $filename) . '<br>';
 			} else {
-				echo 'fail - /' . $filename . '<br>';
+				echo 'fail - ' . preg_replace('/pages/', '', $filename) . '<br>';
 			}
 		}
 	}
