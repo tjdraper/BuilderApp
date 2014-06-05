@@ -1,4 +1,4 @@
-# BuilderApp — Static Site Generator 0.2.0
+# BuilderApp — Static Site Generator 0.2.1
 
 ## CAUTION: Still a work in progress!
 
