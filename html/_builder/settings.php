@@ -21,6 +21,7 @@ $single_variables = array(
 
 // Variable Pairs
 $variable_pairs = array(
+	// Sample Variables
 	'meta_title',
 	'meta_description'
 );
