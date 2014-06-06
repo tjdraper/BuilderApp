@@ -1,3 +1,10 @@
+# 0.3.0
+
+- Add custom single variable parsing (see Readme for use).
+- Add custom variable pair parsing (see Readme for use).
+- Moved primary application scripts into the "_libraries/app"" directory for easier future updating (just replace the whole _libraries folder, done). Index and build files in the root directory "probably" won't need updated very often (although a prettier build page is on the roadmap).
+- Added demos of single and variable pair parsing in the index file.
+
 # 0.2.1
 
 - Output path on success/fail message now reflects from root instead of including "/pages/"

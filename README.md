@@ -1,4 +1,4 @@
-# BuilderApp — Static Site Generator 0.2.1
+# BuilderApp — Static Site Generator 0.3.0"
 
 ## CAUTION: Still a work in progress!
 
@@ -12,29 +12,20 @@ It’s a simple, bare-bones sort of thing, but it get’s the job done.
 
 ## More Caution
 
-I do not recommend letting the \_builder directory live on a live server. I built this with the idea that you would use it in a local environment via [MAMP] or [EasyPHP] or some other local server on your computer, then deploy the generated content to your production server. I have put no security in place at this time. At the very least, if you do commit and deploy it to a production server, use .htaccess to keep unwanted persons out of the \_builder directory.
+It is not recommended to have the \_builder directory live on a live server. The idea is that you would use it in a local environment via [MAMP] or [EasyPHP] or some other local server on your computer, then deploy the generated content to your production server. There is no security in place at this time. At the very least, if you do commit and deploy it to a production server, use .htaccess to keep unwanted persons out of the \_builder directory.
 
 [MAMP]: http://www.mamp.info/
 [EasyPHP]: http://www.easyphp.org/
 
 ## How It Works
 
-When you load up http://yourlocalserver.dev/_builder/, Builder parses and duplicates to the webroot (which is assumed to be the parent folder) the file and directory structure that you put in the "pages" directory.
+When you load up http://yourlocalserver.dev/_builder/, BuilderApp parses the contents of your pages directory, mirroring its structure to the webroot ()assumed as the parent folder), parsing your includes and variables.
 
 ## Variable parsing
 
-I intend to add the ability to parse custom variable replacements in the future, but for now, because it required special treatment anyway, I have added one variable replacement. I envision future variable replacements to be set up in an array. Something like:
-
-	$variables = array(
-		'my_var' => 'my replacement',
-		'another_var' => 'another replacement'
-	)
-
-But I have not implemented it yet because I haven't needed it. What I did need was a special variable, and it is...
-
 ### {{root_path}}
 
-I had to give {{root_path}} special treatment because it has to detect what level it is on. I wanted it to generate something friendly to portable static sites. As such, anything past the first level needs to generate the path in the style of "../".
+The {{root_path}} variable has to be given special treatment because it has to detect what level the page is. This is because it needs to generate something friendly to portable static sites. As such, anything past the first level needs to generate the path in the style of "../".
 
 So, if the page is being generated on the root of the site, {{root_path}} is blank. But if it is a level 2 or level 3 page (or deeper), then the correct path is generated as '../../', etc.
 
@@ -42,33 +33,39 @@ So for instance, in the header include, you could link to the stylesheet like so
 
 	<link rel="stylesheet" href="{{root_path}}css/style.css">
 
-## Variable Set
+## Single Variables
 
-At this time there is one hard-coded variable set. And that is:
+These variables are defined in the "settings.php" file in the $single_variables array. You'll see two samples in the file that you may or may not wish to keep.
 
-### {{meta_title}}
+Here is one of the sample variable in the array:
 
-In your page template, set your meta title like this:
+	'site_name' => 'BuilderApp'
+
+In this case, "site_name" is the key, and "BuilderApp"" is the value. So you can put {{site_name}} anywhere in your templates and it will be replaced with "BuilderApp" whenever you build — just like a CMS such as ExpressionEngine, Craft, or Statamic.
+
+Single Variables are great for never changing variables. But what if you need to set variables per template? I’m glad you asked about that.
+
+## Variable Pairs
+
+These are also defined in the "settings.php" file — or at least the keys are. The settings file ships with two samples of these as well. One of the samples is:
+
+	'meta_title'
+
+It works like this. In your template, you can set any defined variable pair key like this:
 
 	{{meta_title}}My Page Title{{/meta_title}}
 
-And then make sure in your header include that you set the variable {{meta_title}}.
-
-The {{meta_title}} set will be removed from your final output.
-
-## Settings
-
-There are just a couple of settings available at the top of the build.php file and they are as follows.
+Now wherever you put the single variable {{meta_title}}, the contents between the opening and closing key pair will be substituted for that single variable. And of course, the variable pair and contents will not be printed out in the place where they are set.
 
 ### Minify (true|false)
 
-To minify the parsed output, set this variable to true. If you would not like to minify the output, set variable to false.
+To minify the parsed output, set this $minify variable to true in "settings.php". If you would not like to minify the output, set variable to false.
 
 ### Includes
 
 There are two arrays for includes: includes_before and includes_after. The names of the arrays are pretty self explanatory. includes_before will include the content of the files listed in the array before the page content. includes_after will include the content of the files listed in the array after the page content.
 
-Builder looks for includes in the "includes" directory. .html is appended automatically so do not include the html file extension.
+Builder looks for includes in the "includes" directory. ".html"" is appended automatically so do not include the html file extension in the array.
 
 ## Feedback
 
