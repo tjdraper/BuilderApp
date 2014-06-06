@@ -1,4 +1,4 @@
-# BuilderApp — Static Site Generator 0.3.0"
+# BuilderApp — Static Site Generator 0.3.0
 
 ## CAUTION: Still a work in progress!
 
