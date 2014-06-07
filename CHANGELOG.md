@@ -1,3 +1,14 @@
+# 0.4.0
+
+- Complete restructure of the file system. Builder's primary files now live above webroot so they can be included and committed in a working repo but not be exposed to the public if included in a deploy. This lets all source files live in the repo and on the server in case the site needs to be rebuilt, reconstructed, or whatever.
+- Starting to split functions out into files and includes.
+- Clean up and change variable names. Not sure why I was using underscores instead of CamelCase since I like CamelCase better.
+- Pretty up the builder "control panel" (if you can call it that)
+- "Control panel" now no longer generates the site on load. Click the build button to generate the site.
+- Add a sample gitignore file.
+- Add info.txt to the app folder primarily so that the current version of BuilderApp can be easily ascertained.
+- Add version info to the build.php file and the "control panel" for ease of determining which version is currently in use.
+
 # 0.3.0
 
 - Add custom single variable parsing (see Readme for use).

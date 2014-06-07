@@ -1,0 +1,5 @@
+# Ignore the public builder files
+html/_builder/*
+
+# Keep this at the end of your gitignore to keep directories in repo with a .gitkeep file
+!.gitkeep
