@@ -1,3 +1,12 @@
+# 0.4.1
+
+- Move libraries/minification library inside the app folder (because I forgot to in the last release)
+- Now have a meta php file for output of certain meta variables.
+- Html output in the build.php file is now coming from template files and not directly in the php file. This also lead to a slight reorganization of the placement of things in the file.
+- builder.php now uses its own minimal css file for html output.
+
+
+
 # 0.4.0
 
 - Complete restructure of the file system. Builder's primary files now live above webroot so they can be included and committed in a working repo but not be exposed to the public if included in a deploy. This lets all source files live in the repo and on the server in case the site needs to be rebuilt, reconstructed, or whatever.

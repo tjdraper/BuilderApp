@@ -1,26 +1,10 @@
 <?php
 
-// BuilderApp 0.4.0
-
 // Set Directories and initial variables
 chdir('../');
 $publicDir = basename(getcwd());
 chdir('../');
 $rootDirPath = getcwd();
-
-?>
-
-<!DOCTYPE html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>BuilderApp</title>
-<style type="text/css">
-<?php echo file_get_contents('_builderApp' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'style.css'); ?>
-</style>
-</head>
-<body>
-
-<?php
 
 // Include the settings
 include '_builderApp' . DIRECTORY_SEPARATOR . 'settings.php';
@@ -44,10 +28,16 @@ foreach (glob($functions) as $filename) {
     include $filename;
 }
 
+// OUTPUT
+// Header template elements
+echo file_get_contents('_builderApp' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'html' . DIRECTORY_SEPARATOR . 'header1.html');
+echo file_get_contents('_builderApp' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'builderOutputStyle.css');
+echo file_get_contents('_builderApp' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'html' . DIRECTORY_SEPARATOR . 'header2.html');
+
 // Start scanpages function with initial path
 scanPages($pattern, $finalIncludesBefore, $finalIncludesAfter, $minify, $singleVariables, $variablePairs, $publicDir, $rootDirPath, $deleteOrphaned, $orphanedExclude);
 
-?>
+// Footer template elements
+echo file_get_contents('_builderApp' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'html' . DIRECTORY_SEPARATOR . 'footer.html');
 
-</body>
-</html>
+?>

@@ -1,6 +1,7 @@
 <?php
 
 $minify = true;
+
 // This isn't working yet so leave set to false
 $deleteOrphaned = false;
 

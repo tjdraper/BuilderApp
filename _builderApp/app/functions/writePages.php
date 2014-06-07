@@ -53,7 +53,7 @@ function writePages($pattern, $finalIncludesBefore, $finalIncludesAfter, $minify
 
 			// Check if minify is set to true
 			if ($minify == true) {
-				require_once($rootDirPath . DIRECTORY_SEPARATOR . '_builderApp' . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'Minify' . DIRECTORY_SEPARATOR . 'HTML.php');
+				require_once($rootDirPath . DIRECTORY_SEPARATOR . '_builderApp' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'Minify' . DIRECTORY_SEPARATOR . 'HTML.php');
 				$content = Minify_HTML::minify($content);
 			}
 
