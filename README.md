@@ -1,4 +1,4 @@
-# BuilderApp 0.4.1
+# BuilderApp 0.5.0
 
 A simple static site generator.
 
@@ -6,7 +6,7 @@ A simple static site generator.
 
 ## About
 
-If you have occasion to build simple static HTML sites that just don't warrant the use of a full blown CMS — or are building portable, distributable pages for something like documentation where it must be static HTML files, but want to remain [DRY] and keep common parts of the site in template/include files, this may be for you.
+If you have occasion to build simple static HTML sites that just don't warrant the use of a full blown CMS — or are building portable, distributable pages for something like documentation where it must be static HTML files, but want to remain [DRY] and keep common parts of the site in template/layout/include files, this may be for you.
 
 It’s a simple, bare-bones sort of thing, but it get’s the job done.
 
@@ -14,18 +14,41 @@ It’s a simple, bare-bones sort of thing, but it get’s the job done.
 
 ## More Caution
 
-It is not recommended to have the public \_builder directory live on a live server. The idea is that you would use it in a local environment via [MAMP] or [EasyPHP] or some other local server on your computer, then deploy the generated content to your production server. There is no security in place at this time. At the very least, if you do commit and deploy it to a production server, use .htaccess to keep unwanted persons out of the \_builder directory.
+It is not recommended to have the public \_builder directory live on a live server. The idea is that you would use it in a local environment via [MAMP] or [EasyPHP] or some other local server on your computer, then deploy the generated content to your production server. There is no security in place at this time. At the very least, if you do commit and deploy it to a production server, use .htaccess to keep unwanted persons out of the public \_builder directory.
 
 [MAMP]: http://www.mamp.info/
 [EasyPHP]: http://www.easyphp.org/
 
 ## How It Works
 
-When you load up http://yourlocalserver.dev/_builder/, BuilderApp parses the contents of your pages directory (the one in the _builderApp above webroot), mirroring its structure to the webroot), parsing your includes and variables.
+When you load up http://yourlocalserver.dev/\_builder/, BuilderApp parses the contents of your pages directory (the one in the _builderApp above webroot), mirroring its structure to the webroot), and parsing your layouts, includes, and variables along the way.
 
-## Variable parsing
+## Basic Concept and Usage
 
-### {{rootPath}}
+Here are the stages of rendering and how to use them:
+
+- **Pages**
+	- Your pages are retrieved from the pages directory (in _builderApp). The directory hierarchy will be mirrored in your public_html directory.
+- **Layouts**
+	- Layouts can be specified in your page. It is recommended to specify this at the very top of the document. The syntax is: {{layout:myLayout}}.
+	- If not layout is specified, then default.html will be used.
+	- You should always have a default.html in the layouts directory.
+	- All layouts should include the {{page:content}} tag somewhere. The contents of your page will be placed at this location in your layout.
+- **Includes**
+	- All {{include:myInclude}} tags are replaced with the specified include.
+	- Includes live in the includes directory (in _builderApp).
+- **Single Variables**
+	- Single Variables are specified in the settings.php file as a key => value array.
+		- 'myVariableName' => 'myVariableContent'
+	- To use these variables, use the name of the key in double curly braces anywhere in your pages, layouts, or includes like this: {{myVariable}}
+- **Variable Pairs**
+	- Variable pairs are a "set here, get there" retrieval system. They can be used on the same templating level, but their primary intent is to get content from a page into a layout, or a layout into an include, etc.
+	- To set a variable pair, use the syntax: {{set:myVariable}}My Variable Content{{/set:myVariable}}
+	- To retrieve a variable pair, use the syntax: {{get:myVariable}}
+- **Minification**
+	- If you would like to minify (remove extra spaces and line breaks) your final parsed output, set the $minify variable in settings.php to true (ships as true). If you do not want to minify the output, set $minify to false.
+
+## {{rootPath}}
 
 The {{rootPath}} variable has to be given special treatment because it has to detect what level the page is. This is because it needs to generate something friendly to portable static sites. As such, anything past the first level needs to generate the path in the style of "../".
 
@@ -35,43 +58,9 @@ So for instance, in the header include, you could link to the stylesheet like so
 
 	<link rel="stylesheet" href="{{rootPath}}css/style.css">
 
-## Single Variables
-
-These variables are defined in the "settings.php" file in the $singleVariables array. You'll see two samples in the file that you may or may not wish to keep.
-
-Here is one of the sample variable in the array:
-
-	'siteName' => 'BuilderApp'
-
-In this case, "siteName" is the key, and "BuilderApp"" is the value. So you can put {{siteName}} anywhere in your templates and it will be replaced with "BuilderApp" whenever you build — just like a CMS such as ExpressionEngine, Craft, or Statamic would do with variables.
-
-Single Variables are great for never changing items. But what if you need to set variables per template? I’m glad you asked about that.
-
-## Variable Pairs
-
-These are also defined in the "settings.php" file — or at least the keys are. The settings file ships with two samples of these as well. One of the samples is:
-
-	'metaTitle'
-
-It works like this: In your template, you can set any defined variable pair key like this:
-
-	{{metaTitle}}My Page Title{{/metaTitle}}
-
-Now wherever you put the single variable {{metaTitle}}, the contents between the opening and closing key pair will be substituted for that single variable. And of course, the variable pair and contents will not be printed out in the place where they are set.
-
-### Minify (true|false)
-
-To minify the parsed output, set the $minify variable to true in "settings.php". If you would not like to minify the output, set variable to false.
-
-### Includes
-
-There are two arrays for includes: includesBefore and includesAfter. The names of the arrays are pretty self explanatory. includesBefore will include the content of the files listed in the array before the page content. includesAfter will include the content of the files listed in the array after the page content.
-
-Builder looks for includes in the "includes" directory. ".html" is appended automatically so do not include the html file extension in the array.
-
 ## Feedback
 
-Obviously, this is a work in progress, but I welcome feedback. I’ve been primarily a front-end developer until recently so I certainly have not "mastered" PHP. So feel free to give me feed back, or contribute, or whatever else.
+Obviously, this is a work in progress, but I welcome feedback. I’ve been primarily a front-end developer until recently and I certainly have not "mastered" PHP. So feel free to give me feed back, or contribute.
 
 ## License
 

@@ -1,3 +1,21 @@
+# 0.5.0
+
+- **MAJOR STRUCTURAL SHIFT** — Please note a default layout is now **REQUIRED** and there are **SYNTAX CHANGES** for **VARIABLE PAIRS** (remember, in the readme I warned that this is a work in progress :-) )!
+- While a lot of code and code concepts were reused I re-thought and re-wrote large swaths of the generator.
+- The concept of includes before and after have been replaced by {{include:myInclude}} tags.
+- This generator was original written for a specific site. When writing another site with it, I realized a major feature had been left out: the possibility of multiple layouts. So now there is a new "layouts" directory and at least one layout named default.html is required.
+- So parsing now goes like this:
+	- **Page** - The page in your page directory is loaded.
+	- **Layout** - The layout is loaded. If {{layout:myLayout}} has been specified in the page, that layout is loaded. If not, the default layout is loaded. The layout must include a {{page:content}} tag. The contents of your page is placed at this location.
+	- **Includes** - All {{include:myInclude}} tags are replaced with the specified include.
+	- **Single Variables** - All single variables are replaced with the specified variable content.
+	- **Variable Pairs** - WARNING: syntax and behavior have changed. Variable pairs now no longer need to be specified in the settings.php. But all variable pairs need to be prefixed with "set:" like this: {{set:myVariable}}My Content{{/set:myVariable}}. Retrieval of variable pairs must now be prefixed with "get:" like this: {{get:myVariable}}.
+	- **Minification** - Finally, as before, if minify has been set to true in settings.php, the parsed contents of the page are minified.
+	- **File Writing** The last step is file writing. The files are written to the public html folder with the same directory structure that is used/set in the pages directory.
+- Since Variable Pairs are now auto loaded on set, they have been removed from the settings file. Single Variables still need to be set somewhere so they still live in the settings file.
+- Probably not going to get around to writing the auto-delete files functionality anytime soon, so the placeholder settings for that have been removed from the settings file for now.
+
+
 # 0.4.1
 
 - Move libraries/minification library inside the app folder (because I forgot to in the last release)
