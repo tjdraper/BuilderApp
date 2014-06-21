@@ -1,4 +1,4 @@
-BuilderApp 0.4.1
+BuilderApp 0.6.0
 
 Copyright 2014 TJ Draper.
 

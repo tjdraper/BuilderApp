@@ -1,3 +1,11 @@
+# 0.6.0
+
+- **WARNING** This release adds a feature to delete any orphaned files and folders in the public HTML directory. It’s been set to true by default because that seems like the correct default. But if you've been using this app before now you may not be expecting this. Read on for how to use this feature.
+- **Settings** - settings.php now contains the following:
+	- **$removeOrphaned** - set this to true to remove any files and folders not present in the pages directory (default on initial download and use is true). Set to false for BuilderApp to leave all files and folders alone that are not in the pages directory.
+	- **$orphanedFileExlude** - Use this array to exclude single files from being deleted by BuilderApp.
+	- **$orphanedDirectoryExclude** - Use this array to exclude directories and the files and directories contined within from being deleted by BuilderApp.
+
 # 0.5.0
 
 - **MAJOR STRUCTURAL SHIFT** — Please note a default layout is now **REQUIRED** and there are **SYNTAX CHANGES** for **VARIABLE PAIRS** (remember, in the readme I warned that this is a work in progress :-) )!

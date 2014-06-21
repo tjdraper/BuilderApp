@@ -1,4 +1,4 @@
-# BuilderApp 0.5.0
+# BuilderApp 0.6.0
 
 A simple static site generator.
 
@@ -6,9 +6,9 @@ A simple static site generator.
 
 ## About
 
-If you have occasion to build simple static HTML sites that just don't warrant the use of a full blown CMS — or are building portable, distributable pages for something like documentation where it must be static HTML files, but want to remain [DRY] and keep common parts of the site in template/layout/include files, this may be for you.
+If you have occasion to build simple static HTML sites that just don't warrant the use of a big dynamic CMS — or are building portable, distributable pages for something like documentation where it must be static HTML files, but want to remain [DRY] and keep common parts of the site in template/layout/include files, this may be for you.
 
-It’s a simple, bare-bones sort of thing, but it get’s the job done.
+It’s a simple, bare-bones sort of thing that get’s the job done.
 
 [DRY]: http://en.wikipedia.org/wiki/Don't_repeat_yourself
 
@@ -21,22 +21,21 @@ It is not recommended to have the public \_builder directory live on a live serv
 
 ## How It Works
 
-When you load up http://yourlocalserver.dev/\_builder/, BuilderApp parses the contents of your pages directory (the one in the _builderApp above webroot), mirroring its structure to the webroot), and parsing your layouts, includes, and variables along the way.
+When you load up http://yourlocalserver.dev/\_builder/, BuilderApp parses the contents of your pages directory (the one in the \_builderApp above webroot), mirroring its structure to the webroot), and parsing your layouts, includes, and variables along the way.
 
 ## Basic Concept and Usage
 
 Here are the stages of rendering and how to use them:
 
 - **Pages**
-	- Your pages are retrieved from the pages directory (in _builderApp). The directory hierarchy will be mirrored in your public_html directory.
+	- Your pages are retrieved from the pages directory (in \_builderApp). The directory hierarchy will be mirrored in your public_html directory.
 - **Layouts**
+	- In your layouts folder you should have a defaut.html. If no layout is specified, this is what BuilderApp will use.
 	- Layouts can be specified in your page. It is recommended to specify this at the very top of the document. The syntax is: {{layout:myLayout}}.
-	- If not layout is specified, then default.html will be used.
-	- You should always have a default.html in the layouts directory.
 	- All layouts should include the {{page:content}} tag somewhere. The contents of your page will be placed at this location in your layout.
 - **Includes**
 	- All {{include:myInclude}} tags are replaced with the specified include.
-	- Includes live in the includes directory (in _builderApp).
+	- Includes live in the includes directory (in \_builderApp).
 - **Single Variables**
 	- Single Variables are specified in the settings.php file as a key => value array.
 		- 'myVariableName' => 'myVariableContent'
@@ -47,6 +46,11 @@ Here are the stages of rendering and how to use them:
 	- To retrieve a variable pair, use the syntax: {{get:myVariable}}
 - **Minification**
 	- If you would like to minify (remove extra spaces and line breaks) your final parsed output, set the $minify variable in settings.php to true (ships as true). If you do not want to minify the output, set $minify to false.
+- **Delete Orphaned Files**
+	- If $removeOrphaned is set to "true" in settings.php, BuilderApp will remove any orphaned files in the public HTML directory. This keeps you from needing to make deletions in two places. If you delete a file in the pages directory, it will be deleted from your public directory the next time you build.
+	- Set $removeOrphaned to false to tell BuilderApp to leave any files and directories in your public directory that are not in your pages directory alone.
+	- The $orphanedFileExlude array allows you to exlude specific files from being removed by BuilderApp.
+	- The $orphanedDirectoryExclude array allows you to specify directories and their contents to exclude from being removed by BuilderApp.
 
 ## {{rootPath}}
 
@@ -60,7 +64,7 @@ So for instance, in the header include, you could link to the stylesheet like so
 
 ## Feedback
 
-Obviously, this is a work in progress, but I welcome feedback. I’ve been primarily a front-end developer until recently and I certainly have not "mastered" PHP. So feel free to give me feed back, or contribute.
+This is a work in progressa and I welcome feedback. I’ve been primarily a front-end developer until recently and I certainly have not "mastered" PHP. So feel free to give me feed back, or contribute.
 
 ## License
 
