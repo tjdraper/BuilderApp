@@ -1,0 +1,25 @@
+RewriteEngine On
+Options +FollowSymLinks -MultiViews -Indexes
+
+# Headers
+Header set X-UA-Compatible "IE=edge"
+AddDefaultCharset utf-8
+AddCharset utf-8 .css .js .json .rss .xml
+
+# --------
+# Rewrites
+# --------
+
+# Remove index anywhere in URL
+RewriteCond %{THE_REQUEST} /index [NC]
+RewriteRule ^(.*?)index$ /$1 [L,R=301,NC,NE]
+
+# Rewrite to remove HTML from URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L,QSA]
+
+# Rewrite to redirect requests to the HTML version of pages
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.html\ HTTP/
+RewriteRule ^(.*)\.html$ /$1 [R=301,L]

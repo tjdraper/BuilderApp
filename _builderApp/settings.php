@@ -16,6 +16,7 @@ $removeOrphaned = true;
 // Exclude single files from orphan deletion
 $orphanedFileExlude = array(
 	// Sample Orphaned Excludes
+	'sample.htaccess',
 	'myfile.txt',
 	'mydir/myfile.txt'
 );
