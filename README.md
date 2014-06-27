@@ -1,4 +1,4 @@
-# BuilderApp 0.6.0
+# BuilderApp 0.6.1
 
 A simple static site generator.
 

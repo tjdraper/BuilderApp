@@ -66,7 +66,7 @@ function getFilesArray($filesPattern, $filesArray) {
 	// Get all files
 	foreach (glob($filesPattern) as $filename) {
 		if (is_dir($filename) == 1) {
-			$filesArray = getFilesArray($filesPattern . DIRECTORY_SEPARATOR . '*', $filesArray);
+			$filesArray = getFilesArray($filename . DIRECTORY_SEPARATOR . '*', $filesArray);
 		} else {
 			$filename = preg_replace('^' . $GLOBALS['publicDir'] . DIRECTORY_SEPARATOR . '^', '', $filename);
 			$filesArray[] = $filename;

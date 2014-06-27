@@ -1,3 +1,7 @@
+# 0.6.1
+
+- Fixed a big where the deleteOprhans function could get stuck in a loop because the wrong variable was using in calling the function recursively. Honestly, it's amazing that it ever worked at all.
+
 # 0.6.0
 
 - **WARNING** This release adds a feature to delete any orphaned files and folders in the public HTML directory. It’s been set to true by default because that seems like the correct default. But if you've been using this app before now you may not be expecting this. Read on for how to use this feature.
